@@ -3,24 +3,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Ticket {
-    int ticketID;
-    String concertHall;
-    int eventCode;
-    Timestamp time;
-    boolean isPromo;
-    char stadiumSector;
-    float backpackWeight;
-    Timestamp creationTime = new Timestamp(System.currentTimeMillis());
-    private float tikcetPrice;
-
-    // Adding ability to get and set price for ticket
-    public float getTikcetPrice() {
-        return tikcetPrice;
-    }
-
-    public void setTikcetPrice(float tikcetPrice) {
-        this.tikcetPrice = tikcetPrice;
-    }
+    private String ticketID;
+    private String concertHall;
+    private int eventCode;
+    private Timestamp time;
+    private boolean isPromo;
+    private char stadiumSector;
+    private float backpackWeight;
+    private double tikcetPrice;
+    private final Timestamp CreationTime = new Timestamp(System.currentTimeMillis());
 
     // Method to parse the string and convert it to Timestamp
     private Timestamp parseTimestamp(String dateTimeString) {
@@ -34,17 +25,106 @@ public class Ticket {
         return Timestamp.valueOf(localDateTime);
     }
 
-    // Initializing constructors
+    //ADDING GETTER AND SETTER FOR PRIVATE VARIABLES
+    // TicketID
+    public String getTicketID() {
+        return ticketID;
+    }
+
+    public void setTicketID(String ticketID) {
+        if (ticketID.length() <= 4) {
+            this.ticketID = ticketID;
+        } else {
+            throw new IllegalArgumentException("Cannot be more than 4 characters.");
+        }
+    }
+    // ConcertHall
+    public String getConcertHall() {
+        return concertHall;
+    }
+
+    public void setConcertHall(String concertHall) {
+        if (concertHall.length() <= 10) {
+            this.concertHall = concertHall;
+        } else {
+            throw new IllegalArgumentException("Cannot be more than 10 characters.");
+        }
+    }
+    // EventCode
+    public int getEventCode() {
+        return eventCode;
+    }
+
+    public void setEventCode(int eventCode) {
+        if (eventCode >= 100 && eventCode <= 999) {
+            this.eventCode = eventCode;
+        } else {
+            throw new IllegalArgumentException("Must be a 3 digit number.");
+        }
+    }
+    // Time
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = parseTimestamp(time);
+    }
+    // isPromo
+    public boolean isPromo() {
+        return isPromo;
+    }
+
+    public void setPromo(boolean promo) {
+        isPromo = promo;
+    }
+    // StadiumSector
+    public char getStadiumSector() {
+        return stadiumSector;
+    }
+
+    public void setStadiumSector(char stadiumSector) {
+        if (stadiumSector >= 'A' && stadiumSector <= 'C') {
+            this.stadiumSector = stadiumSector;
+        } else {
+            throw new IllegalArgumentException("Allowed characters: 'A', 'B', 'C'.");
+        }
+    }
+    // BackpackWeight
+    public float getBackpackWeight() {
+        return backpackWeight;
+    }
+
+    public void setBackpackWeight(float backpackWeight) {
+        this.backpackWeight = backpackWeight;
+    }
+    // TicketPrice
+    public double getTikcetPrice() {
+        return tikcetPrice;
+    }
+
+    public void setTikcetPrice(double tikcetPrice) {
+        this.tikcetPrice = tikcetPrice;
+    }
+    // CreationTime
+    public Timestamp getCreationTime() {
+        return CreationTime;
+    }
+
+    // INITIALIZING CONSTRUCTORS
+
     // empty
     public Ticket() {
     }
+
     // limited
-    public Ticket(String concertHall, int eventCode) {
+    public Ticket(String concertHall, int eventCode, String time) {
         this.concertHall = concertHall;
         this.eventCode = eventCode;
+        this.time = parseTimestamp(time);
     }
     // full
-    public Ticket(int ticketID, String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight) {
+    public Ticket(String ticketID, String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight) {
         this.ticketID = ticketID;
         this.concertHall = concertHall;
         this.eventCode = eventCode;
