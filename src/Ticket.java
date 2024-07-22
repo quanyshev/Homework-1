@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Ticket {
-    private String ticketID;
+    private String ID;
     private String concertHall;
     private int eventCode;
     private Timestamp time;
@@ -11,7 +11,7 @@ public class Ticket {
     private char stadiumSector;
     private float backpackWeight;
     private double tikcetPrice;
-    private final Timestamp CreationTime = new Timestamp(System.currentTimeMillis());
+    private final Timestamp creationTime = new Timestamp(System.currentTimeMillis());
 
     // Method to parse the string and convert it to Timestamp
     private Timestamp parseTimestamp(String dateTimeString) {
@@ -26,14 +26,14 @@ public class Ticket {
     }
 
     //ADDING GETTER AND SETTER FOR PRIVATE VARIABLES
-    // TicketID
-    public String getTicketID() {
-        return ticketID;
+    // ID
+    public String getID() {
+        return ID;
     }
 
-    public void setTicketID(String ticketID) {
-        if (ticketID.length() <= 4) {
-            this.ticketID = ticketID;
+    public void setID(String ID) {
+        if (ID.length() <= 4) {
+            this.ID = ID;
         } else {
             throw new IllegalArgumentException("Cannot be more than 4 characters.");
         }
@@ -52,7 +52,7 @@ public class Ticket {
     }
     // EventCode
     public int getEventCode() {
-        return eventCode;
+        return this.eventCode;
     }
 
     public void setEventCode(int eventCode) {
@@ -106,9 +106,9 @@ public class Ticket {
     public void setTikcetPrice(double tikcetPrice) {
         this.tikcetPrice = tikcetPrice;
     }
-    // CreationTime
+    // creationTime
     public Timestamp getCreationTime() {
-        return CreationTime;
+        return creationTime;
     }
 
     // INITIALIZING CONSTRUCTORS
@@ -124,8 +124,8 @@ public class Ticket {
         this.time = parseTimestamp(time);
     }
     // full
-    public Ticket(String ticketID, String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight) {
-        this.ticketID = ticketID;
+    public Ticket(String ID, String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight) {
+        this.ID = ID;
         this.concertHall = concertHall;
         this.eventCode = eventCode;
         this.time = parseTimestamp(time);
