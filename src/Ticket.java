@@ -28,7 +28,7 @@ public class Ticket {
     //ADDING GETTER AND SETTER FOR PRIVATE VARIABLES
     // ID
     public String getID() {
-        return ID;
+        return this.ID;
     }
 
     public void setID(String ID) {
@@ -40,7 +40,7 @@ public class Ticket {
     }
     // ConcertHall
     public String getConcertHall() {
-        return concertHall;
+        return this.concertHall;
     }
 
     public void setConcertHall(String concertHall) {
@@ -64,23 +64,23 @@ public class Ticket {
     }
     // Time
     public Timestamp getTime() {
-        return time;
+        return this.time;
     }
 
     public void setTime(String time) {
         this.time = parseTimestamp(time);
     }
     // isPromo
-    public boolean isPromo() {
-        return isPromo;
+    public boolean getPromo() {
+        return this.isPromo;
     }
 
     public void setPromo(boolean promo) {
-        isPromo = promo;
+        this.isPromo = promo;
     }
     // StadiumSector
     public char getStadiumSector() {
-        return stadiumSector;
+        return this.stadiumSector;
     }
 
     public void setStadiumSector(char stadiumSector) {
@@ -92,7 +92,7 @@ public class Ticket {
     }
     // BackpackWeight
     public float getBackpackWeight() {
-        return backpackWeight;
+        return this.backpackWeight;
     }
 
     public void setBackpackWeight(float backpackWeight) {
@@ -100,7 +100,7 @@ public class Ticket {
     }
     // TicketPrice
     public double getTikcetPrice() {
-        return tikcetPrice;
+        return this.tikcetPrice;
     }
 
     public void setTikcetPrice(double tikcetPrice) {
@@ -108,7 +108,7 @@ public class Ticket {
     }
     // creationTime
     public Timestamp getCreationTime() {
-        return creationTime;
+        return this.creationTime;
     }
 
     // INITIALIZING CONSTRUCTORS
@@ -119,18 +119,49 @@ public class Ticket {
 
     // limited
     public Ticket(String concertHall, int eventCode, String time) {
-        this.concertHall = concertHall;
-        this.eventCode = eventCode;
+        // Adding constraints according to requirements, to make sure of validness of arguments
+        if (concertHall.length() <= 10) {
+            this.concertHall = concertHall;
+        } else {
+            throw new IllegalArgumentException("Cannot be more than 10 characters.");
+        }
+
+        if (eventCode >= 100 && eventCode <= 999) {
+            this.eventCode = eventCode;
+        } else {
+            throw new IllegalArgumentException("Must be a 3 digit number.");
+        }
+
         this.time = parseTimestamp(time);
     }
     // full
     public Ticket(String ID, String concertHall, int eventCode, String time, boolean isPromo, char stadiumSector, float backpackWeight) {
-        this.ID = ID;
-        this.concertHall = concertHall;
-        this.eventCode = eventCode;
         this.time = parseTimestamp(time);
         this.isPromo = isPromo;
-        this.stadiumSector = stadiumSector;
         this.backpackWeight = backpackWeight;
+        // Adding constraints according to requirements, to make sure of validness of arguments
+        if (ID.length() <= 4) {
+            this.ID = ID;
+        } else {
+            throw new IllegalArgumentException("Cannot be more than 4 characters.");
+        }
+
+        if (concertHall.length() <= 10) {
+            this.concertHall = concertHall;
+        } else {
+            throw new IllegalArgumentException("Cannot be more than 10 characters.");
+        }
+
+        if (eventCode >= 100 && eventCode <= 999) {
+            this.eventCode = eventCode;
+        } else {
+            throw new IllegalArgumentException("Must be a 3 digit number.");
+        }
+
+        if (stadiumSector >= 'A' && stadiumSector <= 'C') {
+            this.stadiumSector = stadiumSector;
+        } else {
+            throw new IllegalArgumentException("Allowed characters: 'A', 'B', 'C'.");
+        }
     }
 }
